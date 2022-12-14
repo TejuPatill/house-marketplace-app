@@ -3,6 +3,21 @@
   box-sizing: border-box;
 }
 
+.bg-primary {
+  background-color: #f24207 !important;
+}
+
+.bg-secondary {
+  background-color: #fac505 !important;
+}
+
+.btn-primary {
+  background-color: #f24207;
+  color: #ffffff;
+  font-weight: bold;
+  border: #f24207;
+}
+
 html::-webkit-scrollbar {
   display: none;
 }
@@ -142,7 +157,7 @@ button {
 .navbar {
   position: fixed;
   left: 0;
-  bottom: 0;
+  /* bottom: 0; */
   right: 0;
   height: 85px;
   background-color: #ffffff;
@@ -215,7 +230,7 @@ button {
   cursor: pointer;
   color: #00cc66;
   font-weight: 600;
-  text-align: right;
+  text-align: start;
 }
 
 .signInBar,
@@ -289,11 +304,9 @@ button {
 }
 
 .registerLink {
-  margin-top: 4rem;
   color: #00cc66;
   font-weight: 600;
-  text-align: center;
-  margin-bottom: 3rem;
+  text-align: end;
 }
 
 @media (min-width: 1217px) {
