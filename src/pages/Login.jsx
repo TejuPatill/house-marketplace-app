@@ -1,5 +1,7 @@
 import React , {useState} from 'react'
-import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { Link, useNavigate } from 'react-router-dom'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 
 function Login() {
@@ -9,6 +11,8 @@ function Login() {
     email : '',
     password : ''
   })
+
+  const navigate = useNavigate()
 
   const {email,password} = formData
 
@@ -21,6 +25,24 @@ function Login() {
     }))
   }
 
+  const onsubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const auth = getAuth()
+
+      const userCredential = await signInWithEmailAndPassword(auth , email , password)
+      console.log(userCredential)
+      if(userCredential.user) {
+        navigate('/profile')
+      }
+    } catch (error) {
+      toast.error('Unable to Login')
+      console.log(error)
+    }
+
+  }
+
   return (
     <>
       <div className="container pt-5">
@@ -28,7 +50,7 @@ function Login() {
           <p className="pageHeader mt-5">Welcome Back!</p>
         </header>
 
-        <form>
+        <form onSubmit={onsubmit}>
           <input 
             type="email" 
             className="emailInput"
@@ -58,10 +80,10 @@ function Login() {
 
             <div className="row w-50 mx-auto py-0">
               <div className="col-lg-6 col-md-12 py-1">
-                <Link to='/sign-up' className='registerLink'>Sign Up Instead</Link>
+                <Link to='/sign-up' className='registerLink text-md-center text-sm-center'>Sign Up Instead</Link>
               </div>
               <div className="col-lg-6 col-md-12 py-1">
-                <Link to='/forgot-password' className='forgotPasswordLink'>Forgot Password</Link>
+                <Link to='/forgot-password' className='forgotPasswordLink text-md-center text-sm-center'>Forgot Password</Link>
               </div>
             </div>
 

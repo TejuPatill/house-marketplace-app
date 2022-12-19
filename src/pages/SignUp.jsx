@@ -1,4 +1,5 @@
 import React , {useState} from 'react'
+import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
@@ -46,7 +47,8 @@ function SignUp() {
       navigate('/')
       
     } catch (error) {
-      console.log(error.message)
+      toast.error('Unable to Register')
+      console.log(error)
     }
   }
 
@@ -54,7 +56,7 @@ function SignUp() {
     <>
       <div className="container pt-5">
         <header>
-          <p className="pageHeader mt-5">Welcome Back!</p>
+          <p className="pageHeader mt-5">Welcome!</p>
         </header>
 
         <form onSubmit={onSubmit}>
@@ -94,7 +96,7 @@ function SignUp() {
 
             <div className="row w-50 mx-auto py-0">
               <div className="col-lg-6 col-md-12 py-1">
-                <Link to='/sign-up' className='registerLink'>Sign In Instead</Link>
+                <Link to='/login' className='registerLink'>Sign In Instead</Link>
               </div>
               <div className="col-lg-6 col-md-12 py-1">
                 <Link to='/forgot-password' className='forgotPasswordLink'>Forgot Password</Link>
